@@ -23,7 +23,7 @@ class RegisterUserView(APIView):
 
 # Create a view to fetch tasks
 class TaskListView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated] # Require authentication for this view
 
     def get(self, request):
         tasks = Task.objects.filter(user=request.user)
