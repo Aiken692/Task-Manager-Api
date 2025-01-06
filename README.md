@@ -3,21 +3,26 @@
 A Django-based API for managing tasks. This project is part of the Backend Capstone preparation.
 
 ## Authentication Setup
+## Authentication Setup
 
 This project uses Django REST Framework to implement API authentication.
 
 ## Authentication Methods
 
+
 1. **JWT Authentication**
+
 
    - Generate a token: `POST /api/token/`
    - Refresh a token: `POST /api/token/refresh/`
 
 2. **Token Authentication (Optional)**
 
+
    - Generate a token for a user: `python manage.py drf_create_token <username>`
 
 ## Testing the API
+
 
 1. **Obtain a JWT Token**
 
@@ -32,12 +37,17 @@ This project uses Django REST Framework to implement API authentication.
 
    - Example Response:
 
+
      ```json
      {
        "access": "your_access_token",
        "refresh": "your_refresh_token"
      }
      ```
+
+   - **Explanation:**
+     - The request retrieves an access token and a refresh token upon successful authentication.
+     - Store these tokens securely, as they will be used to access authorized API endpoints.
 
    - **Explanation:**
      - The request retrieves an access token and a refresh token upon successful authentication.
