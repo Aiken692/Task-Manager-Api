@@ -8,24 +8,58 @@ from rest_framework_simplejwt.views import (
 )
 
 def home(request):
-    # HTML response providing a better introduction to the API and available endpoints
+    # HTML response with refined styling
     html_content = """
     <html>
-        <head><title>Welcome to the Task Manager API</title></head>
+        <head>
+            <title>Task Manager API</title>
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    text-align: center;
+                    margin-top: 100px;
+                    background-color: #f4f7f6;
+                }
+                h1 {
+                    font-size: 60px;
+                    color: #333;
+                    margin-bottom: 20px;
+                    font-weight: bold;
+                }
+                p {
+                    font-size: 20px;
+                    color: #555;
+                }
+                a {
+                    font-size: 25px;
+                    color: black;
+                    text-decoration: none;
+                    padding: 12px 24px;
+                    background-color: #f8f9fa;
+                    border-radius: 8px;
+                    border: 1px solid #ddd;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+                a:hover {
+                    background-color: #007BFF;
+                    color: white;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        </head>
         <body>
-            <h1>Welcome to the Task Manager API</h1>
-            <p>This API allows you to manage tasks and users. Below are the available endpoints:</p>
-            <ul>
-                <li><strong><a href="/register/">/register/</a></strong> - Register a new user</li>
-                <li><strong><a href="/users/">/users/</a></strong> - List all users</li>
-                <li><strong><a href="/tasks/">/tasks/</a></strong> - Get a list of tasks</li>
-                <li><strong><a href="/tasks/create/">/tasks/create/</a></strong> - Create a new task</li>
-                <li><strong>/tasks/&lt;int:pk&gt;/</strong> - Update an existing task by ID</li>
-                <li><strong>/tasks/delete/&lt;int:pk&gt;/</strong> - Delete a task by ID</li>
-                <li><strong><a href="/api/token/">/api/token/</a></strong> - Obtain a new authentication token</li>
-                <li><strong><a href="/api/token/refresh/">/api/token/refresh/</a></strong> - Refresh the authentication token</li>
-            </ul>
-            <p>For more information, please refer to the API documentation.</p>
+            <div class="container">
+                <h1>Task Manager API</h1>
+                <p>Welcome to the Task Manager API! You can manage tasks and users through the API.</p>
+                <p><a href="http://localhost:8000/swagger/">Documentation</a></p>
+            </div>
         </body>
     </html>
     """
