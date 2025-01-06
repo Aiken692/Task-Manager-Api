@@ -45,7 +45,20 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'tasks',
     'rest_framework.authtoken',  # For token-based authentication
+    'drf_yasg', # For API documentation
 ]
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'Enter your JWT token in the format: Bearer <token>',
+        },
+    },
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
