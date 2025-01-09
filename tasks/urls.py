@@ -7,19 +7,7 @@ from rest_framework_simplejwt.views import (
 )
 
 def home(request):
-    # Manually list the URL patterns
-    url_list = [
-        request.build_absolute_uri('/register/'),
-        request.build_absolute_uri('/users/'),
-        request.build_absolute_uri('/tasks/'),
-        request.build_absolute_uri('/tasks/create/'),
-        '/tasks/id',  # Display as plain text
-        '/tasks/delete/id',  # Display as plain text
-        '/api/token/',  # Display as plain text
-        '/api/token/refresh/',  # Display as plain text
-    ]
-
-    # Format the HTML content with the URL list in a table
+    # HTML content for the landing page
     html_content = f"""
     <html>
         <head>
@@ -42,39 +30,30 @@ def home(request):
                     color: #555;
                 }}
                 a {{
-                    font-size: 25px;
-                    color: black;
+                    font-size: 16px;
+                    color: #007BFF;
                     text-decoration: none;
-                    padding: 12px 24px;
-                    background-color: #f8f9fa;
-                    border-radius: 8px;
-                    border: 1px solid #ddd;
-                    transition: background-color 0.3s, color 0.3s;
                 }}
                 a:hover {{
-                    background-color: #007BFF;
-                    color: white;
-                }}
-                .container {{
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                    background-color: #ffffff;
-                    border-radius: 12px;
-                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                    text-decoration: underline;
                 }}
                 table {{
-                    width: 100%;
-                    margin-top: 20px;
+                    width: 60%;
+                    margin: 20px auto;
                     border-collapse: collapse;
                 }}
                 th, td {{
-                    padding: 10px;
-                    border: 1px solid #ddd;
                     text-align: left;
+                    padding: 12px;
+                    border: 1px solid #ddd;
                 }}
                 th {{
                     background-color: #f8f9fa;
+                    font-size: 18px;
+                    color: #333;
+                }}
+                td {{
+                    font-size: 16px;
                 }}
             </style>
         </head>
@@ -86,8 +65,40 @@ def home(request):
                 <table>
                     <tr>
                         <th>URL</th>
+                        <th>Description</th>
                     </tr>
-                    {"".join([f"<tr><td>{url if 'id' in url else f'<a href={url}>{url}</a>'}</td></tr>" for url in url_list])}
+                    <tr>
+                        <td><a href="/register/">Register User</a></td>
+                        <td>/register</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/users/">List Users</a></td>
+                        <td>/users</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/tasks/">List Tasks</a></td>
+                        <td>/tasks</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/tasks/create/">Create Task</a></td>
+                        <td>/tasks/create</td>
+                    </tr>
+                    <tr>
+                        <td>Update Task</td>
+                        <td>/tasks/id</td>
+                    </tr>
+                    <tr>
+                        <td>Delete Task</td>
+                        <td>/tasks/delete/id</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/api/token/">Obtain Token</a></td>
+                        <td>/api/token/</td>
+                    </tr>
+                    <tr>
+                        <td><a href="/api/token/refresh/">Refresh Token</a></td>
+                        <td>/api/token/refresh/</td>
+                    </tr>
                 </table>
             </div>
         </body>
