@@ -1,17 +1,24 @@
+import os
 from django.urls import path
 from django.http import HttpResponse
 from .views import RegisterUserView, TaskListView, TaskCreateView, UserListView, TaskUpdateView, TaskDeleteView
-from django.http import HttpResponse
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
-def home(request):
-    # Dynamically determine the host
-    current_host = request.get_host()
+# Define a variable to store the base URL
+BASE_URL = os.environ.get('BASE_URL')
 
-    # HTML response with refined styling and dynamic host handling
+# If BASE_URL is not set (likely local development), use the default local URL
+if not BASE_URL:
+    BASE_URL = "http://localhost:8000"
+
+def home(request):
+    # HTML response with refined styling
+
+    documentation_url = f"{BASE_URL}/swagger/"
+
     html_content = f"""
     <html>
         <head>
@@ -61,12 +68,13 @@ def home(request):
             <div class="container">
                 <h1>Task Manager API</h1>
                 <p>Welcome to the Task Manager API! You can manage tasks and users through the API.</p>
-                <p><a href="http://{current_host}/swagger/">Documentation</a></p>
+                <p><a href="{documentation_url}">Documentation</a></p>
             </div>
         </body>
     </html>
     """
     return HttpResponse(html_content)
+
 urlpatterns = [
     path('', home, name='home'),  # Add this line for the root URL
     path('register/', RegisterUserView.as_view(), name='register_user'),
