@@ -1,10 +1,7 @@
 from django.urls import path
 from django.http import HttpResponse
 from .views import RegisterUserView, TaskListView, TaskCreateView, UserListView, TaskUpdateView, TaskDeleteView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 def home(request):
     # HTML content for the landing page
@@ -99,6 +96,10 @@ def home(request):
                         <td><a href="/api/token/refresh/">Refresh Token</a></td>
                         <td>/api/token/refresh/</td>
                     </tr>
+                    <tr>
+                        <td><a href="/login/">Login</a></td>
+                        <td>/login/</td>
+                    </tr>
                 </table>
             </div>
         </body>
@@ -116,4 +117,5 @@ urlpatterns = [
     path('tasks/delete/<int:pk>/', TaskDeleteView.as_view(), name='task_delete'),  # Delete a task by pk
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('login/', TokenObtainPairView.as_view(), name='login'),  # Add this line for the login URL
 ]

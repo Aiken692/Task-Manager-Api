@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
 from .models import Task
 from .serializers import TaskSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class RegisterUserView(APIView):
     permission_classes = [AllowAny]  # Allow any user to access this view
@@ -110,4 +111,7 @@ class TaskDeleteView(APIView):
         except Task.DoesNotExist:
             # Return an error if the task does not exist
             return Response({"error": "Task not found."}, status=status.HTTP_404_NOT_FOUND)
-
+        except Exception as e:
+            # Log the exception and return a generic error response
+            print(f"Error: {e}")
+            return Response({"error": "An error occurred."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
