@@ -1,4 +1,3 @@
-import os
 from django.urls import path
 from django.http import HttpResponse
 from .views import RegisterUserView, TaskListView, TaskCreateView, UserListView, TaskUpdateView, TaskDeleteView
@@ -7,18 +6,20 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-# Define a variable to store the base URL
-BASE_URL = os.environ.get('BASE_URL')
-
-# If BASE_URL is not set (likely local development), use the default local URL
-if not BASE_URL:
-    BASE_URL = "http://localhost:8000"
-
 def home(request):
-    # HTML response with refined styling
+    # Manually list the URL patterns
+    url_list = [
+        request.build_absolute_uri('/register/'),
+        request.build_absolute_uri('/users/'),
+        request.build_absolute_uri('/tasks/'),
+        request.build_absolute_uri('/tasks/create/'),
+        '/tasks/id',  # Display as plain text
+        '/tasks/delete/id',  # Display as plain text
+        '/api/token/',  # Display as plain text
+        '/api/token/refresh/',  # Display as plain text
+    ]
 
-    documentation_url = f"{BASE_URL}/swagger/"
-
+    # Format the HTML content with the URL list in a table
     html_content = f"""
     <html>
         <head>
@@ -62,13 +63,32 @@ def home(request):
                     border-radius: 12px;
                     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
                 }}
+                table {{
+                    width: 100%;
+                    margin-top: 20px;
+                    border-collapse: collapse;
+                }}
+                th, td {{
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    text-align: left;
+                }}
+                th {{
+                    background-color: #f8f9fa;
+                }}
             </style>
         </head>
         <body>
             <div class="container">
                 <h1>Task Manager API</h1>
                 <p>Welcome to the Task Manager API! You can manage tasks and users through the API.</p>
-                <p><a href="{documentation_url}">Documentation</a></p>
+                <p>Documentation</p>
+                <table>
+                    <tr>
+                        <th>URL</th>
+                    </tr>
+                    {"".join([f"<tr><td>{url if 'id' in url else f'<a href={url}>{url}</a>'}</td></tr>" for url in url_list])}
+                </table>
             </div>
         </body>
     </html>
