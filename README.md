@@ -1,4 +1,6 @@
 # Task Management API
+<img width="781" alt="image" src="https://github.com/user-attachments/assets/fac41ba9-408b-4caf-9f5f-744a281f0e46" />
+
 
 A Django-based API for managing tasks. This project is part of the Backend Capstone preparation.
 
